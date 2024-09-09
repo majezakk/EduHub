@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Создание нового учебного курса</title>
+</head>
+<body>
+<h2>Создание нового учебного курса</h2>
+<form action="/course/create" method="post">
+
+  <input type="text" name="name" placeholder="Название курса" required>
+  <input type="text" name="description" placeholder="Описание курса" required>
+  <input type="number" name="credits" placeholder="Часы" required>
+
+  <button type="submit">Создать курс</button>
+
+</form>
+</body>
+</html>

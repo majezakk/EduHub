@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Список преподователей</title>
+
+</head>
+
+<body>
+
+<h2>Список преподователей</h2>
+
+<form action="/teacher/create" method="get">
+
+  <button>Создать нового преподователя</button>
+
+</form>
+<ul>
+
+  <th:block th:each="teacher : ${teachers}">
+    <li th:text="${teacher.getId()} + ' ' + ${teacher.getName()} + ' ' + ${teacher.getEmail()} + ' ' + ${teacher.getDepartment()}">
+    </li>
+  </th:block>
+
+</ul>
+</body>
+
+</html>
