@@ -1,19 +1,19 @@
 package com.example.EduHub.controller;
 
 import com.example.EduHub.model.StudentModel;
-import com.example.EduHub.service.InMemoryStudentImpl;
 import com.example.EduHub.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Controller
 @RequestMapping("/student")
 public class StudentController {
-
     private final StudentService studentService;
 
-    public StudentController(InMemoryStudentImpl studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
@@ -21,24 +21,27 @@ public class StudentController {
     public String getStudentAll(Model model){
         var students = studentService.findAllStudent();
         model.addAttribute("students",students);
-        return "index";
+        return "index";  // Убедитесь, что это правильное имя шаблона
     }
 
     @GetMapping("/create")
     public String getCreateStudent(){
-        return  "createStudent";
+        return "createStudent";
     }
 
     @PostMapping("/create")
     public String postCreateStudent(
-            @RequestParam(name="name")
-            String name,
-            @RequestParam(name="email")
-            String email,
-            @RequestParam(name="password")
-            String password
+            @RequestParam(name="name") String name,
+            @RequestParam(name="email") String email,
+            @RequestParam(name="password") String password
     ){
         studentService.createStudent(new StudentModel(name,email,password));
+        return "redirect:/student";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable UUID id) {
+        studentService.deleteStudent(id);
         return "redirect:/student";
     }
 }

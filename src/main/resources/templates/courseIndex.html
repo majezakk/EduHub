@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Список курсов</title>
+  <link rel="stylesheet" href="/CSS/list-pages.css">
 </head>
 <body>
-<h2>Список курсов</h2>
-<form action="/course/create" method="get">
-  <button>Создать новый курс</button>
-</form>
-
-<ul>
-  <th:block th:each="course : ${courses}">
-    <li th:text="${course.getId()} + ' ' + ${course.getName()} + ' ' + ${course.getDescription()} + ' ' + ${course.getCredits()}">
+<div class="top-menu">
+  <a href="/">Назад</a>
+  <a href="/course/create">Создать курс</a>
+</div>
+<div class="content">
+  <h2>Список курсов</h2>
+  <ul>
+    <li th:each="course : ${courses}">
+      <span th:text="${course.getName() + ' - ' + course.getDescription() + ' (' + course.getCredits() + ' кредитов)'}"></span>
+      <form th:action="@{/course/delete/{id}(id=${course.getId()})}" method="post" class="delete-form">
+        <button type="submit" class="delete-btn">Удалить</button>
+      </form>
     </li>
-  </th:block>
-</ul>
-
+  </ul>
+</div>
 </body>
 </html>

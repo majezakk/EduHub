@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Список студентов</title>
+    <link rel="stylesheet" href="/CSS/list-pages.css">
 </head>
 <body>
-    <h2>Вывод всех студентов</h2>
-    <form action="/student/create" method="get">
-        <button >Добавление студентов</button>
-    </form>
+<div class="top-menu">
+    <a href="/">Назад</a>
+    <a href="/student/create">Создать студента</a>
+</div>
+<div class="content">
+    <h2>Список студентов</h2>
     <ul>
-        <th:block th:each="student : ${students}">
-            <li th:text="${student.getId()} +' '+  ${student.getName()} +' '+ ${student.getEmail()} + ' ' + ${student.getPassword()}">
-            </li>
-        </th:block>
+        <li th:each="student : ${students}">
+            <span th:text="${student.getName() + ' - ' + student.getEmail()}"></span>
+            <form th:action="@{/student/delete/{id}(id=${student.getId()})}" method="post" class="delete-form">
+                <button type="submit" class="delete-btn">Удалить</button>
+            </form>
+        </li>
     </ul>
-
+</div>
 </body>
 </html>

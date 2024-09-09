@@ -2,12 +2,10 @@ package com.example.EduHub.repository;
 
 import com.example.EduHub.model.StudentModel;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.IntStream;
-
 
 @Repository
 public class StudentRepository {
@@ -17,8 +15,8 @@ public class StudentRepository {
         return STUDENTS;
     }
 
-    public  StudentModel findStudentById(UUID id){
-       return STUDENTS.stream().filter(element -> element.getId() == id).findFirst().orElse(null);
+    public StudentModel findStudentById(UUID id){
+        return STUDENTS.stream().filter(element -> element.getId().equals(id)).findFirst().orElse(null);
     }
 
     public StudentModel createStudent(StudentModel student){
@@ -28,7 +26,7 @@ public class StudentRepository {
 
     public StudentModel updateStudent(StudentModel student){
         var studentIndex = IntStream.range(0, STUDENTS.size())
-                .filter(index-> STUDENTS.get(index).getEmail().equals(student.getEmail()))
+                .filter(index-> STUDENTS.get(index).getId().equals(student.getId()))
                 .findFirst()
                 .orElse(-1);
         if(studentIndex == -1){
@@ -38,7 +36,7 @@ public class StudentRepository {
         return student;
     }
 
-    public void deleteStudent (UUID  id){
+    public void deleteStudent(UUID id){
         var student = findStudentById(id);
         if(student != null){
             STUDENTS.remove(student);

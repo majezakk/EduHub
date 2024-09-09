@@ -3,13 +3,11 @@ package com.example.EduHub.service;
 import com.example.EduHub.model.StudentModel;
 import com.example.EduHub.repository.StudentRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class InMemoryStudentImpl implements StudentService {
-
     private final StudentRepository studentRepository;
 
     public InMemoryStudentImpl(StudentRepository studentRepository){
@@ -23,12 +21,12 @@ public class InMemoryStudentImpl implements StudentService {
 
     @Override
     public StudentModel createStudent(StudentModel student) {
-        return  studentRepository.createStudent(student);
+        return studentRepository.createStudent(student);
     }
 
     @Override
     public StudentModel updateStudent(StudentModel student) {
-        return  studentRepository.updateStudent(student);
+        return studentRepository.updateStudent(student);
     }
 
     @Override

@@ -3,11 +3,10 @@ package com.example.EduHub.controller;
 import com.example.EduHub.model.TeacherModel;
 import com.example.EduHub.service.TeacherService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/teacher")
@@ -37,6 +36,12 @@ public class TeacherController {
             @RequestParam(name = "department") String department
     ) {
         teacherService.createTeacher(new TeacherModel(name, email, department));
+        return "redirect:/teacher";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteTeacher(@PathVariable UUID id) {
+        teacherService.deleteTeacher(id);
         return "redirect:/teacher";
     }
 }
