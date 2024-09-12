@@ -1,7 +1,6 @@
 package com.example.EduHub.service;
 
 import com.example.EduHub.model.TeacherModel;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -11,4 +10,6 @@ public interface TeacherService {
     TeacherModel updateTeacher(TeacherModel teacher);
     TeacherModel findTeacherById(UUID id);
     void deleteTeacher(UUID id);
+    void createBulkTeachers(int count);
+    void deleteAllTeachers();
 }

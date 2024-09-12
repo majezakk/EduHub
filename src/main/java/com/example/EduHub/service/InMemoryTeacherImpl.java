@@ -3,7 +3,6 @@ package com.example.EduHub.service;
 import com.example.EduHub.model.TeacherModel;
 import com.example.EduHub.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -38,5 +37,20 @@ public class InMemoryTeacherImpl implements TeacherService {
     @Override
     public void deleteTeacher(UUID id) {
         teacherRepository.deleteTeacher(id);
+    }
+
+    @Override
+    public void createBulkTeachers(int count) {
+        for (int i = 0; i < count; i++) {
+            String name = "Teacher " + (i + 1);
+            String email = "teacher" + (i + 1) + "@example.com";
+            String department = "Department " + ((i % 5) + 1); // 5 разных отделов
+            createTeacher(new TeacherModel(name, email, department));
+        }
+    }
+
+    @Override
+    public void deleteAllTeachers() {
+        teacherRepository.deleteAllTeachers();
     }
 }

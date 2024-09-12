@@ -4,22 +4,58 @@
   <meta charset="UTF-8">
   <title>Список курсов</title>
   <link rel="stylesheet" href="/CSS/list-pages.css">
+  <style>
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .pagination a {
+      margin: 0 5px;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+    .bulk-actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .bulk-actions form {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
 <div class="top-menu">
-  <a href="/">Назад</a>
-  <a href="/course/create">Создать курс</a>
+  <a href="/">Главная</a>
+  <a href="/course/create">Добавить курс</a>
 </div>
 <div class="content">
   <h2>Список курсов</h2>
   <ul>
     <li th:each="course : ${courses}">
-      <span th:text="${course.getName() + ' - ' + course.getDescription() + ' (' + course.getCredits() + ' кредитов)'}"></span>
+      <span th:text="${course.getName() + ' - ' + course.getDescription() + ' (' + course.getHours() + ' часов)'}"></span>
       <form th:action="@{/course/delete/{id}(id=${course.getId()})}" method="post" class="delete-form">
         <button type="submit" class="delete-btn">Удалить</button>
       </form>
     </li>
   </ul>
+  <div class="pagination">
+    <a th:if="${currentPage > 0}" th:href="@{/course(page=${currentPage - 1})}">Предыдущая</a>
+    <span th:text="${currentPage + 1 + ' из ' + totalPages}"></span>
+    <a th:if="${currentPage < totalPages - 1}" th:href="@{/course(page=${currentPage + 1})}">Следующая</a>
+  </div>
+  <div class="bulk-actions">
+    <form action="/course/create-bulk" method="post">
+      <button type="submit">Добавить 20 курсов</button>
+    </form>
+    <form action="/course/delete-all" method="post">
+      <button type="submit">Удалить все курсы</button>
+    </form>
+  </div>
 </div>
 </body>
 </html>

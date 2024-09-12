@@ -6,16 +6,15 @@ public class CourseModel {
     private UUID id;
     private String name;
     private String description;
-    private int credits;
+    private int hours;
 
-    public CourseModel(String name, String description, int credits) {
+    public CourseModel(String name, String description, int hours) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;
-        this.credits = credits;
+        this.hours = hours;
     }
 
-    // Геттеры и сеттеры
     public UUID getId() {
         return id;
     }
@@ -40,11 +39,11 @@ public class CourseModel {
         this.description = description;
     }
 
-    public int getCredits() {
-        return credits;
+    public int getHours() {
+        return hours;
     }
 
-    public void setCredits(int credits) {
-        this.credits = credits;
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 }

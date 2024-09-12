@@ -2,7 +2,6 @@ package com.example.EduHub.repository;
 
 import com.example.EduHub.model.TeacherModel;
 import org.springframework.stereotype.Repository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -42,5 +41,9 @@ public class TeacherRepository {
         if (teacher != null) {
             TEACHERS.remove(teacher);
         }
+    }
+
+    public void deleteAllTeachers() {
+        TEACHERS.clear();
     }
 }

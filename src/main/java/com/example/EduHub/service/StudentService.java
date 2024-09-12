@@ -9,5 +9,7 @@ public interface StudentService {
     StudentModel createStudent(StudentModel student);
     StudentModel updateStudent(StudentModel student);
     StudentModel findStudentById(UUID id);
-    void deleteStudent(UUID id);  // Убедитесь, что этот метод присутствует
+    void deleteStudent(UUID id);
+    void createBulkStudents(int count);
+    void deleteAllStudents();
 }

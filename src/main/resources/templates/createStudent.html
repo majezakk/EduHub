@@ -2,14 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Создать студента</title>
+    <link rel="stylesheet" href="/CSS/form-styles.css">
 </head>
 <body>
-<form action="/student/create" method="post">
-    <input type="text" name="name" placeholder="Имя" required>
-    <input type="text" name="email" placeholder="Почта" required>
-    <input type="text" name="password" placeholder="Пароль" required>
-    <button type="submit">Добавление студента</button>
-</form>
+<div class="form-container">
+    <h2>Создать нового студента</h2>
+    <form action="/student/create" method="post" onsubmit="return validateForm()">
+        <input type="text" name="name" id="name" placeholder="Имя студента" required>
+        <div class="error" id="nameError"></div>
+
+        <input type="email" name="email" id="email" placeholder="Email студента" required>
+        <div class="error" id="emailError"></div>
+
+        <input type="password" name="password" id="password" placeholder="Пароль" required>
+        <div class="error" id="passwordError"></div>
+
+        <button type="submit">Создать студента</button>
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (name.length < 2) {
+            document.getElementById('nameError').textContent = 'Имя должно содержать не менее 2 символов';
+            isValid = false;
+        } else {
+            document.getElementById('nameError').textContent = '';
+        }
+
+        if (!email.includes('@')) {
+            document.getElementById('emailError').textContent = 'Введите корректный email';
+            isValid = false;
+        } else {
+            document.getElementById('emailError').textContent = '';
+        }
+
+        if (password.length < 6) {
+            document.getElementById('passwordError').textContent = 'Пароль должен содержать не менее 6 символов';
+            isValid = false;
+        } else {
+            document.getElementById('passwordError').textContent = '';
+        }
+
+        return isValid;
+    }
+</script>
 </body>
 </html>

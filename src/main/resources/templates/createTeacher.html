@@ -2,21 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Create Teacher</title>
+  <title>Создать преподавателя</title>
+  <link rel="stylesheet" href="/CSS/form-styles.css">
 </head>
 <body>
+<div class="form-container">
+  <h2>Создать нового преподавателя</h2>
+  <form action="/teacher/create" method="post" onsubmit="return validateForm()">
+    <input type="text" name="name" id="name" placeholder="Имя преподавателя" required>
+    <div class="error" id="nameError"></div>
 
-<h2>Создание нового преподователя</h2>
+    <input type="email" name="email" id="email" placeholder="Email преподавателя" required>
+    <div class="error" id="emailError"></div>
 
-<form action="/teacher/create" method="post">
+    <input type="text" name="department" id="department" placeholder="Кафедра" required>
+    <div class="error" id="departmentError"></div>
 
-  <input type="text" name="name" placeholder="Имя преподователя" required>
-  <input type="email" name="email" placeholder="Почта преподователя" required>
-  <input type="text" name="department" placeholder="Факультет" required>
+    <button type="submit">Создать преподавателя</button>
+  </form>
+</div>
 
-  <button type="submit">Создать преподователя</button>
+<script>
+  function validateForm() {
+    let isValid = true;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const department = document.getElementById('department').value;
 
-</form>
+    if (name.length < 2) {
+      document.getElementById('nameError').textContent = 'Имя должно содержать не менее 2 символов';
+      isValid = false;
+    } else {
+      document.getElementById('nameError').textContent = '';
+    }
 
+    if (!email.includes('@')) {
+      document.getElementById('emailError').textContent = 'Введите корректный email';
+      isValid = false;
+    } else {
+      document.getElementById('emailError').textContent = '';
+    }
+
+    if (department.length < 2) {
+      document.getElementById('departmentError').textContent = 'Название кафедры должно содержать не менее 2 символов';
+      isValid = false;
+    } else {
+      document.getElementById('departmentError').textContent = '';
+    }
+
+    return isValid;
+  }
+</script>
 </body>
 </html>

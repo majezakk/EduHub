@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <title>Список студентов</title>
     <link rel="stylesheet" href="/CSS/list-pages.css">
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .bulk-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .bulk-actions form {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 <div class="top-menu">
-    <a href="/">Назад</a>
-    <a href="/student/create">Создать студента</a>
+    <a href="/">Главная</a>
+    <a href="/student/create">Добавить студента</a>
 </div>
 <div class="content">
     <h2>Список студентов</h2>
@@ -20,6 +43,19 @@
             </form>
         </li>
     </ul>
+    <div class="pagination">
+        <a th:if="${currentPage > 0}" th:href="@{/student(page=${currentPage - 1})}">Предыдущая</a>
+        <span th:text="${currentPage + 1 + ' из ' + totalPages}"></span>
+        <a th:if="${currentPage < totalPages - 1}" th:href="@{/student(page=${currentPage + 1})}">Следующая</a>
+    </div>
+    <div class="bulk-actions">
+        <form action="/student/create-bulk" method="post">
+            <button type="submit">Добавить 20 студентов</button>
+        </form>
+        <form action="/student/delete-all" method="post">
+            <button type="submit">Удалить всех</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>
